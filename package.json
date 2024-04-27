@@ -4,7 +4,7 @@
   "description": "A user management service",
   "main": "index.js",
   "scripts": {
-    "dev": "node src/server.js",
+    "dev": "tsc && node dist/server.js",
     "format:check": "prettier . --check",
     "format:fix": "prettier . --write",
     "lint": "eslint .",
@@ -13,6 +13,12 @@
   },
   "author": "Anirudh Jwala <anirudhjwala@gmail.com>",
   "license": "ISC",
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint:fix",
+      "npm run format:fix"
+    ]
+  },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
@@ -24,10 +30,7 @@
     "prettier": "3.2.5",
     "typescript": "^5.4.5"
   },
-  "lint-staged": {
-    "*.ts": [
-      "npm run lint:fix",
-      "npm run format:fix"
-    ]
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }
