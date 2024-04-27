@@ -1,14 +1,19 @@
 import app from './app';
 import { Config } from './config';
+import logger from './config/logger';
 
 const startServer = () => {
   const PORT = Config.PORT;
 
   try {
-    app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-  } catch (error) {
-    console.error('Error connecting: ', error);
-    process.exit(1);
+    app.listen(PORT, () => logger.info(`Listening on port ${PORT}`));
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      logger.error('Error connecting: ', error.message);
+      setTimeout(() => {
+        process.exit(1);
+      }, 1000);
+    }
   }
 };
 
