@@ -1,10 +1,15 @@
+import app from './app';
 import { Config } from './config';
 
-console.log('PORT', Config.PORT);
-console.log('NODE_ENV', Config.NODE_ENV);
+const startServer = () => {
+  const PORT = Config.PORT;
 
-function login(username: string): string {
-  return username;
-}
+  try {
+    app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+  } catch (error) {
+    console.error('Error connecting: ', error);
+    process.exit(1);
+  }
+};
 
-login('anirudh');
+startServer();
